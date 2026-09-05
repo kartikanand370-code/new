@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#10051f">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Stock Signal">
+  <title>Croma Stock Signal</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-512.png">
+  <style>
+    :root{--bg:#10051f;--card:#1d1032;--card2:#281642;--line:#442563;--text:#f7efff;--muted:#b79bda;--pink:#ec4899;--purple:#a855f7;--cyan:#22d3ee;--green:#22c55e;--red:#fb4b54;--amber:#fbbf24}
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    body{background-image:radial-gradient(circle at 8% 0%,#54278b66,transparent 35%),radial-gradient(circle at 100% 90%,#db277733,transparent 38%)}
+    button,input,textarea,select{font:inherit}button{cursor:pointer}
+    .wrap{width:min(960px,100%);margin:auto;padding:24px 18px 40px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:24px}
+    .brand{display:flex;align-items:center;gap:12px}.logo{display:grid;place-items:center;width:50px;height:50px;border-radius:16px;background:linear-gradient(140deg,var(--purple),var(--pink));font-size:26px;box-shadow:0 12px 30px #a855f755}.brand h1{font-size:22px;line-height:1;margin:0}.brand p{margin:6px 0 0;color:var(--muted);font-size:12px}
+    .top-actions{display:flex;gap:8px;align-items:center}.pill{border:1px solid var(--line);background:#1a0c2caa;color:var(--muted);padding:8px 10px;border-radius:99px;font-size:11px;font-weight:700}.network-online{color:#86efac;border-color:#1f9d60}.network-offline,.network-error{color:#fca5a5;border-color:#a62f49}.network-checking{color:#fde68a;border-color:#9a741c}.install{display:none;border:0;border-radius:10px;background:var(--green);color:#052e16;padding:9px 12px;font-size:12px;font-weight:800}
+    .hero{display:grid;grid-template-columns:1.35fr .65fr;gap:16px;margin-bottom:16px}.hero-card,.card{background:#1d1032dd;border:1px solid var(--line);border-radius:18px;box-shadow:0 18px 44px #0004}.hero-card{padding:24px}.hero h2{font-size:30px;line-height:1.08;margin:0 0 10px;max-width:530px}.hero h2 span{color:#f0abfc}.hero p{color:var(--muted);font-size:14px;line-height:1.55;margin:0;max-width:560px}.hero-stat{padding:20px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(155deg,#302052,#1d1032)}.hero-stat b{font-size:42px;line-height:1;color:#fff}.hero-stat span{color:var(--muted);font-size:12px;line-height:1.4}.card{padding:18px;margin-bottom:16px}.card h3{margin:0 0 5px;font-size:17px}.sub{color:var(--muted);font-size:12px;line-height:1.45;margin:0 0 14px}.label{display:block;color:#d9c2f2;font-size:12px;font-weight:800;margin:14px 0 7px}.textarea{width:100%;min-height:124px;resize:vertical;border:1px solid var(--line);border-radius:12px;background:#130822;color:var(--text);padding:12px;font-size:14px;line-height:1.55}.textarea:focus,input:focus,select:focus{outline:2px solid #c084fc55;border-color:var(--purple)}.meta{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-top:6px}.controls{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:14px}.control{flex:1;min-width:150px;border:1px solid var(--line);border-radius:11px;background:#130822;color:var(--text);padding:12px}.btn{border:0;border-radius:11px;padding:12px 16px;font-size:13px;font-weight:800;color:#fff}.primary{background:linear-gradient(135deg,var(--purple),var(--pink));box-shadow:0 8px 22px #c026d355}.secondary{background:#3b2360}.stop{background:var(--red)}.btn:disabled{opacity:.45;cursor:not-allowed}.toggles{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.toggle{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#261342;color:#d8b4fe;font-size:12px;font-weight:800}.toggle.on{background:#123c31;border-color:#25a875;color:#8ff5c0}.help{margin-top:10px;color:var(--muted);font-size:11px;line-height:1.45}.progress{height:8px;border-radius:8px;background:#130822;border:1px solid var(--line);overflow:hidden;margin-top:15px}.progress div{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));transition:width .2s}.status{margin-top:9px;color:var(--muted);font-size:12px;min-height:18px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}.stat{padding:11px 8px;text-align:center;border:1px solid var(--line);border-radius:12px;background:#130822;color:var(--muted);font-size:11px}.stat b{display:block;color:#fff;font-size:22px;margin-top:3px}.notice{display:none;margin-top:12px;padding:11px 12px;border-radius:11px;background:#6b4d1122;border:1px solid #a87b24;color:#fde68a;font-size:12px;line-height:1.4}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px}table{width:100%;border-collapse:collapse;min-width:520px;font-size:12px}th,td{padding:12px 10px;text-align:left;border-bottom:1px solid var(--line)}th{background:#130822;color:#c084fc;font-size:10px;text-transform:uppercase;letter-spacing:.6px}td{color:#eadcf8}td small{display:block;color:var(--muted);font-size:10px;margin-top:3px}td.offer{color:#fcd34d;font-weight:800}td.stock{color:#86efac;font-weight:800}.empty{text-align:center;color:var(--muted);padding:20px}.foot{text-align:center;color:var(--muted);font-size:11px;padding-top:6px;opacity:.75}
+    @media(max-width:680px){.wrap{padding:16px 12px 28px}.top{align-items:flex-start}.brand h1{font-size:19px}.logo{width:44px;height:44px;font-size:22px}.pill{display:none}.network-pill{display:inline-flex;font-size:10px;padding:7px 8px}.hero{grid-template-columns:1fr}.hero-card{padding:19px}.hero h2{font-size:27px}.hero-stat{min-height:100px;flex-direction:row;align-items:center}.card{padding:14px}.stats{grid-template-columns:repeat(2,1fr)}.controls .btn{flex:1}.control{min-width:calc(50% - 5px)}}
+    @media(max-width:390px){.brand p{font-size:11px}.top-actions{gap:4px}.install{padding:8px}.hero h2{font-size:24px}.textarea{min-height:105px}.btn{padding:11px 12px}}
+    .hero{grid-template-columns:1fr}
+    .access-card{border-color:#6d3aa0}.access-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.access-head h3{margin-bottom:4px}.access-badge{white-space:nowrap;border:1px solid #9a741c;border-radius:99px;padding:7px 9px;color:#fde68a;font-size:10px;font-weight:800}.access-badge.allowed{border-color:#1f9d60;color:#86efac}.access-badge.denied{border-color:#a62f49;color:#fca5a5}.device-row{display:flex;gap:8px;align-items:center;margin-top:12px}.device-id{flex:1;min-width:0;overflow:auto;white-space:nowrap;border:1px dashed #7042a0;border-radius:10px;background:#130822;color:#e9d5ff;padding:11px;font:11px ui-monospace,monospace}.copy-device{border:0;border-radius:10px;background:#3b2360;color:#fff;padding:11px;font-size:11px;font-weight:800}.access-help{margin:10px 0 0}.locked{opacity:.42;pointer-events:none;user-select:none}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <div class="brand"><div class="logo">📦</div><div><h1>Croma Stock Signal</h1><p>Private restock watch for your saved products</p></div></div>
+      <div class="top-actions"><span class="pill">SAVED LOCALLY</span><span class="pill network-pill network-checking" id="networkStatus">◐ Network checking</span><button class="install" id="installBtn">📲 Install</button></div>
+    </header>
+    <section class="card access-card" id="accessCard">
+      <div class="access-head"><div><h3>VIP Device Access</h3><p class="sub" id="accessMessage">Checking this device...</p></div><span class="access-badge" id="accessBadge">CHECKING</span></div>
+      <div class="device-row"><code class="device-id" id="deviceId">Generating device ID...</code><button class="copy-device" id="copyDevice">Copy ID</button></div>
+      <div class="controls"><button class="btn secondary" id="recheckAccess">Recheck access</button></div>
+      <p class="help access-help">Send this Device ID to VIP Croma Tools owner. Only allowlisted devices can use stock checking.</p>
+    </section>
+    <div id="toolContent" class="locked">
+    <section class="hero"><div class="hero-card"><h2>Welcome to <span>VIP Croma Tools</span></h2><p>Live Croma stock checking with coupon alerts, saved watchlists and instant signals.</p></div></section>
+    <section class="card"><h3>Latest signals</h3><p class="sub">Your active stock alerts appear here first. Results remain available when you reopen the app.</p><div class="table-wrap"><table><thead><tr><th>Product</th><th>Pincodes</th><th>Status</th></tr></thead><tbody id="results"><tr><td class="empty" colspan="3">No qualifying stock yet</td></tr></tbody></table></div></section>
+    <section class="card">
+      <h3>Build your watchlist</h3><p class="sub">Use one product ID per line. Add <b>WC</b> only when that product should alert on stock without requiring a coupon.</p>
+      <label class="label" for="products">Product IDs</label><textarea class="textarea" id="products" placeholder="322040&#10;318413&#10;322040WC"></textarea><div class="meta"><span id="productCount">0/50 products</span><span>Plain ID = coupon filter · WC = stock-only</span></div>
+      <label class="label" for="pincodes">Pincodes</label><textarea class="textarea" id="pincodes" placeholder="110001&#10;400001"></textarea><div class="meta"><span id="pinCount">0 pincodes</span><span>Six digits each</span></div>
+      <div class="controls"><input class="control" id="category" value="mobile" aria-label="Product category"><select class="control" id="interval" aria-label="Refresh interval"><option value="1">Refresh every 1 sec</option><option value="2">Refresh every 2 sec</option><option value="5">Refresh every 5 sec</option><option value="10">Refresh every 10 sec</option></select></div>
+      <div class="toggles"><button class="toggle" id="coupon" data-on="false">🎟 Coupon alerts: OFF</button><button class="toggle" id="mute">🔊 Sound on</button></div>
+      <p class="help">Coupon OFF: any stock can show for a plain ID. Coupon ON: a plain ID shows only with an active coupon. A WC ID shows stock with or without a coupon.</p>
+      <div class="controls"><button class="btn primary" id="start">▶ Start watch</button><button class="btn stop" id="stop" disabled>■ Stop</button><button class="btn secondary" id="clear">Clear results</button></div>
+      <div class="progress"><div id="progressBar"></div></div><div class="status" id="status"></div>
+      <div class="stats"><div class="stat">In stock<b id="stockCount">0</b></div><div class="stat">Locations<b id="locationCount">0</b></div><div class="stat">Errors<b id="errorCount">0</b></div><div class="stat">Parallel<b id="parallelCount">0</b></div></div>
+      <div class="notice" id="offerNotice">⚡ Stock with offer detected. Coupon alert is active for this product.</div>
+    </section>
+    </div>
+    <footer class="foot">Croma Stock Signal · Add to Home Screen from your browser menu on iPhone.</footer>
+  </main>
+  <audio id="mario" preload="auto" src="mario.mp3.mpeg"></audio>
+  <script src="app.js"></script>
+  <script>if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));</script>
+</body>
+</html>
